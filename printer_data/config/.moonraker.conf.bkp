@@ -1,0 +1,110 @@
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /home/nas81/printer_data/comms/klippy.sock
+
+[authorization]
+trusted_clients = 
+	192.168.0.0/16
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+	192.168.4.114
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+channel = dev
+refresh_interval = 168
+
+[update_manager mainsail]
+path = /home/nas81/mainsail
+repo = mainsail-crew/mainsail
+channel = stable
+type = web
+
+[update_manager client ZeroGTheme]
+type = git_repo
+path = ~/zerog-mainsail-theme
+origin = https://github.com/ZeroGDesign/zerog-mainsail-theme.git
+install_script = install.sh
+is_system_service = False
+
+[update_manager octoeverywhere]
+type = git_repo
+channel = beta
+path = /home/nas81/octoeverywhere
+origin = https://github.com/QuinnDamerell/OctoPrint-OctoEverywhere.git
+env = /home/nas81/octoeverywhere-env/bin/python
+requirements = requirements.txt
+install_script = install.sh
+managed_services = 
+	octoeverywhere
+
+[announcements]
+subscriptions = 
+	octoeverywhere
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+managed_services = crowsnest
+install_script = tools/pkglist.sh
+
+[update_manager mainsail-config]
+type = git_repo
+primary_branch = master
+path = ~/mainsail-config
+origin = https://github.com/mainsail-crew/mainsail-config.git
+managed_services = klipper
+
+[update_manager beacon]
+type = git_repo
+channel = dev
+path = ~/beacon_klipper
+origin = https://github.com/beacon3d/beacon_klipper.git
+env = ~/klippy-env/bin/python
+requirements = requirements.txt
+install_script = install.sh
+is_system_service = False
+managed_services = klipper
+info_tags = 
+	desc=Beacon Surface Scanner
+
+[update_manager led_effect]
+type = git_repo
+path = ~/klipper-led_effect
+origin = https://github.com/julianschill/klipper-led_effect.git
+is_system_service = False
+
+[update_manager mobileraker]
+install_script = /home/nas81/mobileraker_companion/scripts/install.sh
+requirements = /home/nas81/mobileraker_companion/scripts/mobileraker-requirements.txt
+env = /home/nas81/mobileraker-env/bin/python
+managed_services = mobileraker
+primary_branch = main
+origin = https://github.com/Clon1998/mobileraker_companion.git
+path = /home/nas81/mobileraker_companion
+type = git_repo
+
+[file_manager]
+enable_object_processing = True
+
+[spoolman]
+server = http://192.168.4.114:7912
+sync_rate = 5
+
